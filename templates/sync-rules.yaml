@@ -1,0 +1,101 @@
+# ============================================================
+# Cross-IDE Sync Rules Configuration
+# ============================================================
+# This file defines which plugin data should be shared/isolated
+# across multiple VS Code-based IDEs.
+#
+# Structure:
+#   plugins:
+#     - pluginId: "<extension.id>"
+#       share:     # Directories to symlink (shared across IDEs)
+#         - "globalStorage/<dir>/"
+#       isolate:  # Directories to keep separate per IDE
+#         - "globalStorage/<dir>/"
+#
+# ============================================================
+
+plugins:
+  # ----------------------------------------------------------
+  # Roo Code - Full sync (current working config)
+  # ----------------------------------------------------------
+  - pluginId: "rooveterinaryinc.roo-cline"
+    share:
+      - "globalStorage/settings/"
+      - "globalStorage/cache/"
+      - "globalStorage/tasks/"
+      - "globalStorage/modes/"
+    isolate: []
+    notes: |
+      Share MCP config, custom modes, model cache, and task history.
+      All IDEs will see the same conversations and configurations.
+
+  # ----------------------------------------------------------
+  # GitHub Copilot - Settings only
+  # ----------------------------------------------------------
+  - pluginId: "github.copilot"
+    share:
+      - "globalStorage/github.copilot/settings/"
+    isolate:
+      - "globalStorage/github.copilot/chat/"
+      - "globalStorage/github.copilot-sessions/"
+    notes: |
+      Share Copilot settings but keep chat history per-IDE.
+
+  # ----------------------------------------------------------
+  # Prettier - Formatter config
+  # ----------------------------------------------------------
+  - pluginId: "esbenp.prettier-vscode"
+    share:
+      - "globalStorage/prettier/"
+    isolate: []
+    notes: |
+      Share Prettier configuration across all IDEs.
+
+  # ----------------------------------------------------------
+  # ESLint - Linter config
+  # ----------------------------------------------------------
+  - pluginId: "dbaeumer.vscode-eslint"
+    share:
+      - "globalStorage/eslint/"
+    isolate: []
+    notes: |
+      Share ESLint configuration across all IDEs.
+
+  # ----------------------------------------------------------
+  # GitLens - Git annotations (isolate by default)
+  # ----------------------------------------------------------
+  - pluginId: "eamodio.gitlens"
+    share: []
+    isolate:
+      - "globalStorage/gitlens/"
+    notes: |
+      Keep GitLens data per-IDE (blame info, etc).
+
+# ============================================================
+# Global Settings
+# ============================================================
+global:
+  # Central hub location (change to your preferred path)
+  centralHub: "D:\CrossIDE\shared"
+  
+  # Backup location
+  backupRoot: "D:\CrossIDE\backup"
+  
+  # Log directory
+  logDir: "D:\CrossIDE\logs"
+  
+  # Default conflict resolution strategy
+  # Options: "hub-wins", "ide-wins", "newest-wins", "manual"
+  conflictStrategy: "hub-wins"
+  
+  # Enable automatic sync after link creation
+  autoSync: true
+  
+  # Maximum log retention days
+  maxLogDays: 30
+  
+  # IDEs to include (empty = all detected)
+  includeIDEs: []
+  
+  # IDEs to exclude
+  excludeIDEs: []
